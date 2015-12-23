@@ -1,0 +1,16 @@
+- var menuItems = {'Home': '/', 'Articles':'/articles', 'About': '/about'};
+
+nav.navbar.navbar-default
+    .container
+        .navbar-header
+            button.navbar-toggle.collapsed(type='button' data-target='#navbar' aria-expanded='false' aria-controls='navbar' data-toggle='collapse') Menu
+            a.navbar-brand My app
+        .collapse.navbar-collapse#navbar
+            ul.nav.navbar-nav
+                each val, key in menuItems
+                    if activeMenuItem === key
+                        li.active
+                            a(href=val, title=key)= key
+                    else
+                        li
+                            a(href=val, title=key)= key
