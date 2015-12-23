@@ -1,5 +1,9 @@
 extends ../layout
 
 block content
-  h1= title
-  p This is the articles main page
+    h1= title
+    p This is the articles main page
+
+    each article in articles
+        h3= article.title
+        p= article.content
