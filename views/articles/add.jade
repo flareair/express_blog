@@ -1,0 +1,23 @@
+extends ../layout
+
+block content
+    h1= title
+    p Here you can add article
+    p
+        a(href='/articles') Articles list
+    .row
+        .col-md-6
+            form(method="post" action="/articles/add")
+                .form-group
+                    label(for='articleTitle') Article title
+                    input.form-control#articleTitle(name='title' type='text')= article.title
+                .form-group
+                    label(for='articleContent') Article content
+                    textarea.form-control#articleContent(name='content' type='text' rows='6')= article.content
+                if errors
+                    .form-group
+                        ul.list-unstyled.text-danger
+                            each err in errors
+                                li= err.message
+                .form-group
+                    button.btn.btn-primary(type='submit') Submit

@@ -3,6 +3,8 @@ extends ../layout
 block content
     h1= title
     p This is the articles main page
+    p
+        a(href='/articles/add') Add article
 
     each article in articles
         h3= article.title

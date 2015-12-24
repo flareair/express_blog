@@ -13,7 +13,7 @@ var articles = require('./routes/articles');
 var app = express();
 
 var mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/foobar');
+mongoose.connect('mongodb://localhost/myblog');
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
