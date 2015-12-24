@@ -112,12 +112,17 @@ exports.update = function(req, res, next) {
         runValidators: true
     };
 
-    Article.findOneAndUpdate({_id: req.params.id}, req.body, updateOptions, function(err, article) {
-        if (err) {
-            return res.status(400).json(err.errors);
+    Article.findOneAndUpdate(
+        {_id: req.params.id},
+        req.body,
+        updateOptions,
+        function(err, article) {
+            if (err) {
+                return res.status(400).json(err.errors);
+            }
+            res.json({updated: true, id: article.id});
         }
-        res.json({updated: true, id: article.id});
-    });
+    );
 };
 
 /*
