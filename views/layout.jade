@@ -9,8 +9,9 @@ html(lang='en')
         meta(name='description', content= metaDescription)
 
         //- vendor css
-        link(rel='stylesheet', href='/vendor/bootstrap/dist/css/bootstrap.min.css')
-        link(rel='stylesheet', href='/vendor/font-awesome/css/font-awesome.min.css')
+        block styles
+            link(rel='stylesheet', href='/vendor/bootstrap/dist/css/bootstrap.min.css')
+            link(rel='stylesheet', href='/vendor/font-awesome/css/font-awesome.min.css')
     body
         //- include main menu
         include partials/_main-menu
@@ -18,6 +19,7 @@ html(lang='en')
         .container
             block content
     //- vendor scripts
-    script(src='/vendor/jquery/dist/jquery.min.js')
-    script(src='/vendor/bootstrap/dist/js/bootstrap.min.js')
+    block scripts
+        script(src='/vendor/jquery/dist/jquery.min.js')
+        script(src='/vendor/bootstrap/dist/js/bootstrap.min.js')
 

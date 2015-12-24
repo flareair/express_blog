@@ -6,6 +6,10 @@ block content
     p
         a(href='/articles/add') Add article
 
+    if message === 'deleted'
+        .alert.alert-success Article deleted
+
     each article in articles
-        h3= article.title
+        a(href='/articles/' + article.id)
+            h3= article.title
         p= article.content

@@ -1,0 +1,12 @@
+extends ../layout
+
+block content
+    h1= title
+    div= article.content
+    br
+    p
+        a.btn.btn-default#articleEdit(href='/articles/' + article.id + '/edit') Edit article
+        a.btn.btn-danger#articleDelete(href='/articles/' + article.id) Delete article
+
+block append scripts
+    script(src='/js/ajaxButtons.js')
