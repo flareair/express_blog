@@ -6,8 +6,12 @@ $(document).ready(function() {
         $.ajax({
             url: link,
             type: 'DELETE',
+            dataType: 'json',
             success: function(result) {
                 window.location.replace('/articles/?message=deleted');
+            },
+            error: function(err) {
+                console.log(err);
             }
         });
     });

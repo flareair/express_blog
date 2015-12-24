@@ -1,6 +1,11 @@
 extends ../layout
 
 block content
+    if message === 'saved'
+        .alert.alert-success New article saved
+    else if message === 'updated'
+        .alert.alert-success Article updated
+
     h1= title
     div= article.content
     br
@@ -9,4 +14,4 @@ block content
         a.btn.btn-danger#articleDelete(href='/articles/' + article.id) Delete article
 
 block append scripts
-    script(src='/js/ajaxButtons.js')
+    script(src='/js/articles/ajaxButtons.js')

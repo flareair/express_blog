@@ -11,7 +11,8 @@ router.get('/:id/edit', articlesController.edit);
 
 router.post('/add', articlesController.newArticle);
 
-// router.put('')
+router.put('/:id', articlesController.update);
+router.patch('/:id', articlesController.update);
 
 router.delete('/:id', articlesController.delete);
 

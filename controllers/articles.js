@@ -41,7 +41,8 @@ exports.show = function(req, res, next) {
             title: article.title,
             metaDescription: article.title,
             activeMenuItem: 'Articles',
-            article: article
+            article: article,
+            message: req.query.message
         });
     });
 };
@@ -55,6 +56,7 @@ exports.add = function(req, res, next) {
         title: 'Add article',
         metaDescription: 'Add article',
         activeMenuItem: 'Articles',
+        formAction: '/articles/add',
         article: new Article()
     });
 };
@@ -74,6 +76,7 @@ exports.edit = function(req, res, next) {
             title: 'Edit article ' + article.title,
             metaDescription: 'Edit article',
             activeMenuItem: 'Articles',
+            formAction: '/articles/' + article.id,
             article: article
         });
     });
@@ -88,19 +91,14 @@ exports.edit = function(req, res, next) {
 exports.newArticle = function(req, res, next) {
     var article = new Article(req.body);
 
-    article.save(function(err) {
+    article.save(function(err, newArticle) {
         if (err) {
-            return res.render('articles/add', {
-                title: 'Add article',
-                metaDescription: 'Add article',
-                activeMenuItem: 'Articles',
-                article: req.body,
-                errors: err.errors
-            });
+            return res.status(400).json(err.errors);
         }
 
-        res.redirect('/articles');
+        res.json({saved: true, id: newArticle.id});
     });
+
 };
 
 /*
@@ -108,7 +106,13 @@ exports.newArticle = function(req, res, next) {
 */
 
 exports.update = function(req, res, next) {
-    //
+    console.log('update');
+    Article.findOneAndUpdate({_id: req.params.id}, req.body, function(err, article) {
+        if (err) {
+            return res.status(400).json(err.errors);
+        }
+        res.json({updated: true, id: article.id});
+    });
 };
 
 /*
@@ -121,6 +125,6 @@ exports.delete = function(req, res, next) {
         if (err) {
             return next(err);
         }
-        res.end('ok');
+        res.json({deleted: true});
     });
 };
