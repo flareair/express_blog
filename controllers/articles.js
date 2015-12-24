@@ -106,8 +106,13 @@ exports.newArticle = function(req, res, next) {
 */
 
 exports.update = function(req, res, next) {
-    console.log('update');
-    Article.findOneAndUpdate({_id: req.params.id}, req.body, function(err, article) {
+    var updateOptions = {
+        upsert: true,
+        setDefaultsOnInsert: true,
+        runValidators: true
+    };
+
+    Article.findOneAndUpdate({_id: req.params.id}, req.body, updateOptions, function(err, article) {
         if (err) {
             return res.status(400).json(err.errors);
         }
