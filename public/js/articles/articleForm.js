@@ -4,21 +4,6 @@ $(document).ready(function() {
         var $form = $('#articleForm');
         var link = $form.attr('action');
 
-        var ajaxProps = {};
-
-        if (link === '/articles/add') {
-            ajaxProps.type = 'POST';
-            ajaxProps.successCb = function(result) {
-                window.location.replace('/articles/' + result.id);
-            };
-        } else {
-            ajaxProps.type = 'PUT',
-            ajaxProps.successCb = function(result) {
-                // console.log(result);
-                window.location.replace('/articles/' + result.id);
-            };
-        }
-
         var data = {};
 
         $.map($form.serializeArray(), function(item){
@@ -34,10 +19,12 @@ $(document).ready(function() {
 
         $.ajax({
             url: link,
-            type: ajaxProps.type,
+            type: (link === '/articles/add') ? 'POST': 'PUT',
             data: data,
             dataType: 'json',
-            success: ajaxProps.successCb,
+            success: function(result) {
+                window.location.replace('/articles/' + result.id);
+            },
             error: function(err) {
                 console.log(err);
                 clearWarnings();
