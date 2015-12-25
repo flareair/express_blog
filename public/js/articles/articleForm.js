@@ -9,13 +9,13 @@ $(document).ready(function() {
         if (link === '/articles/add') {
             ajaxProps.type = 'POST';
             ajaxProps.successCb = function(result) {
-                window.location.replace('/articles/' + result.id + '/?message=saved');
+                window.location.replace('/articles/' + result.id);
             };
         } else {
             ajaxProps.type = 'PUT',
             ajaxProps.successCb = function(result) {
                 // console.log(result);
-                window.location.replace('/articles/' + result.id + '/?message=updated');
+                window.location.replace('/articles/' + result.id);
             };
         }
 

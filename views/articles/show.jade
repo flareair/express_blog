@@ -1,12 +1,12 @@
 extends ../layout
 
 block content
-    if message === 'saved'
-        .alert.alert-success New article saved
-    else if message === 'updated'
-        .alert.alert-success Article updated
 
     h1= title
+
+    while message = flash.shift()
+        div(class='alert alert-#{message.type}')= message.message
+
     div= article.content
     br
     p

@@ -13,14 +13,13 @@ exports.index = function(req, res, next) {
             return next(err);
         }
 
-        console.log(articles);
+        console.log(req.session);
 
         res.render('articles/index', {
             title: 'Articles',
             metaDescription: 'Articles page',
             activeMenuItem: 'Articles',
             articles: articles,
-            message: req.query.message
         });
     });
 
@@ -36,13 +35,11 @@ exports.show = function(req, res, next) {
         if (err) {
             return next();
         }
-
         res.render('articles/show', {
             title: article.title,
             metaDescription: article.title,
             activeMenuItem: 'Articles',
             article: article,
-            message: req.query.message
         });
     });
 };
@@ -71,7 +68,6 @@ exports.edit = function(req, res, next) {
         if (err) {
             return next();
         }
-        console.log(article);
         res.render('articles/edit', {
             title: 'Edit article ' + article.title,
             metaDescription: 'Edit article',
@@ -95,7 +91,7 @@ exports.newArticle = function(req, res, next) {
         if (err) {
             return res.status(400).json(err.errors);
         }
-
+        req.flash('success', 'New article saved');
         res.json({saved: true, id: newArticle.id});
     });
 
@@ -120,6 +116,7 @@ exports.update = function(req, res, next) {
             if (err) {
                 return res.status(400).json(err.errors);
             }
+            req.flash('success', 'Article updated');
             res.json({updated: true, id: article.id});
         }
     );
@@ -135,6 +132,7 @@ exports.delete = function(req, res, next) {
         if (err) {
             return next(err);
         }
+        req.flash('success', 'Article deleted');
         res.json({deleted: true});
     });
 };

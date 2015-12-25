@@ -5,6 +5,10 @@ block content
     p Here you can add article
     p
         a(href='/articles') Articles list
+
+    while message = flash.shift()
+        div(class='alert alert-#{message.type}')= message.message
+
     include ./_form
 
 block append scripts

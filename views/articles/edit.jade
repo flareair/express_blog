@@ -2,6 +2,8 @@ extends ../layout
 
 block content
     h1= title
+    while message = flash.shift()
+        div(class='alert alert-#{message.type}')= message.message
 
     include _form.jade
 

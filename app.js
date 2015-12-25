@@ -4,14 +4,16 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-
-
+var session = require('express-session');
+var MongoStore = require('connect-mongo')(session);
+var flash = require('flash');
 // Routes
 var routes = require('./routes/index');
 var articles = require('./routes/articles');
 
 var app = express();
 
+// connect to mongodb
 var mongoose = require('mongoose');
 mongoose.connect('mongodb://localhost/myblog');
 
@@ -27,6 +29,18 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+// session middleware
+
+app.use(session({
+    secret: 'my_blog',
+    saveUninitialized: true,
+    resave: true,
+    store: new MongoStore({mongooseConnection: mongoose.connection}),
+    cookie: { maxAge: 60000 }
+}));
+app.use(flash());
+
+// routes
 app.use('/', routes);
 app.use('/articles', articles);
 

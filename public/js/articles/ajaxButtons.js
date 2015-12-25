@@ -8,7 +8,7 @@ $(document).ready(function() {
             type: 'DELETE',
             dataType: 'json',
             success: function(result) {
-                window.location.replace('/articles/?message=deleted');
+                window.location.replace('/articles');
             },
             error: function(err) {
                 console.log(err);
