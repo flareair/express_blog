@@ -108,9 +108,13 @@ exports.update = function(req, res, next) {
         runValidators: true
     };
 
+    var update = {
+        $set: { title: req.body.title, content: req.body.content }
+    };
+
     Article.findOneAndUpdate(
         {_id: req.params.id},
-        req.body,
+        update,
         updateOptions,
         function(err, article) {
             if (err) {
