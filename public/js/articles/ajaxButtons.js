@@ -1,4 +1,6 @@
 $(document).ready(function() {
+
+    /* Delete article handler*/
     $('#articleDelete').click(function(e) {
         e.preventDefault();
 

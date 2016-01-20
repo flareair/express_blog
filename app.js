@@ -6,6 +6,7 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var session = require('express-session');
 var MongoStore = require('connect-mongo')(session);
+// middleware for flash messages
 var flash = require('flash');
 // Routes
 var routes = require('./routes/index');

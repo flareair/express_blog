@@ -1,5 +1,12 @@
 'use strict';
 
+/*
+    Static pages controller
+*/
+
+/*
+    Index page
+*/
 
 exports.index = function(req, res) {
     res.render('pages/index', {
@@ -9,6 +16,9 @@ exports.index = function(req, res) {
     });
 };
 
+/*
+    About page
+*/
 
 exports.about = function(req, res) {
     res.render('pages/about', {
