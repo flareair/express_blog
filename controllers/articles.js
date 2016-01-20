@@ -103,7 +103,7 @@ exports.newArticle = function(req, res, next) {
 
 exports.update = function(req, res, next) {
     var updateOptions = {
-        upsert: true,
+        // upsert: true,
         setDefaultsOnInsert: true,
         runValidators: true
     };
