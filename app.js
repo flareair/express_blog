@@ -6,17 +6,27 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var session = require('express-session');
 var MongoStore = require('connect-mongo')(session);
+// passport
+var passport = require('passport');
 // middleware for flash messages
 var flash = require('flash');
+
+
+// db config
+
+var dbconf = require('./config/db');
 // Routes
 var routes = require('./routes/index');
 var articles = require('./routes/articles');
 
 var app = express();
 
+// passport config
+
+// require('./config/passport')(passport);
 // connect to mongodb
 var mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/myblog');
+mongoose.connect(dbconf.url);
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -39,6 +49,10 @@ app.use(session({
     store: new MongoStore({mongooseConnection: mongoose.connection}),
     cookie: { maxAge: 60000 }
 }));
+
+app.use(passport.initialize());
+app.use(passport.session());
+
 app.use(flash());
 
 // routes
